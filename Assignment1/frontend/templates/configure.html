@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+    <!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <head>
+        <link rel="stylesheet" href="styles.css">
+        <title>configure memcache</title>
+    </head>
+    <body>
+            <form action="{{ url_for('configApi')}}" method="post"  >
+                <div class="form-group">
+                    <label>capacity:</label>
+                    <input type="number" name="capacity" class="form-control"/>
+                </div>
+
+                <div class="form-group" >
+                    <label>policy: </label>
+                    <select name="Replacement policy: LRU or Random" >
+                        <option value="LRU">LRU</option>
+                        <option value="Random">Random</option>
+                      </select>
+                </div>
+                <button type="submit" class="btn btn-default">Submit</button>
+      
+            </form>
+            <form action="{{ url_for('clear')}}" method="get"  >
+                <button type="submit" class="btn btn-default">Clear Cache</button>
+            </form>
+
+                      
+            {% if success %}
+            <div>
+                successfully change the configuration
+                </div>                
+            {% endif %}  
+            {% if clear%}
+            <div>
+                successfully clear cache
+            </div>
+            {% endif %} 
+    <body>
+</html>

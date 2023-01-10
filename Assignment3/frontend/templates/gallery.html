@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <!-- Required meta tags -->
+     <meta charset="utf-8" />
+     <meta
+         name="viewport"
+         content="width=device-width, initial-scale=1, shrink-to-fit=no"
+     />
+     <!-- Bootstrap CSS -->
+     <link
+         rel="stylesheet"
+         href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
+         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+         crossorigin="anonymous"
+     />
+     <title>Photo APP</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        .header {
+            text-align: center;
+            padding: 32px;
+        }
+
+        .row {
+            display: -ms-flexbox;
+            /* IE 10 */
+            display: flex;
+            -ms-flex-wrap: wrap;
+            /* IE 10 */
+            flex-wrap: wrap;
+            padding: 0 4px;
+        }
+
+        /* Create two equal columns that sits next to each other */
+        .column {
+            -ms-flex: 50%;
+            /* IE 10 */
+            flex: 50%;
+            padding: 0 4px;
+        }
+
+        .column img {
+            margin-top: 8px;
+            vertical-align: middle;
+        }
+
+        /* Style the buttons */
+        .btn {
+            border: none;
+            outline: none;
+            padding: 10px 16px;
+            background-color: #f1f1f1;
+            cursor: pointer;
+            font-size: 18px;
+        }
+
+        .btn:hover {
+            background-color: #ddd;
+        }
+
+        .btn.active {
+            background-color: #666;
+            color: white;
+        }
+    </style>
+    
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="{{url_for('main')}} ">Photo APP</a>
+        <button
+            class="navbar-toggler"
+            type="button"
+            data-toggle="collapse"
+            data-target="#navbarNav"
+            aria-controls="navbarNav"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+        >
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+
+                {% if not success %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{{url_for('login')}}"
+                        >Log in
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{url_for('signup')}}"
+                        >Sign Up
+                    </a>
+                </li>
+                {% endif %} {% if success %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{{url_for('gallery')}}"
+                        >Gallery
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{url_for('upload')}}"
+                        >Upload
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="{{url_for('show')}}"
+                        >Show Image</a
+                    >
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="{{url_for('getkeys')}}"
+                        >ShowAllKeys
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{url_for('showImageByLabel')}}"
+                        >ShowImageByLabel
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{url_for('config')}}"
+                        >ConfigMem
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="{{url_for('signout')}}"
+                        >Sign Out
+                    </a>
+                </li>
+                {% endif %}
+                
+            </ul>
+        </div>
+    </nav>
+     <!-- Optional JavaScript -->
+        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+        <script
+            src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+            crossorigin="anonymous"
+        ></script>
+        <script
+            src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js"
+            integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+            crossorigin="anonymous"
+        ></script>
+        <script
+            src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js"
+            integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+            crossorigin="anonymous"
+        ></script>
+
+    <!-- Header -->
+    <div class="header" id="myHeader">
+        <h1>Image Grid</h1>
+        <p>Click on the buttons to change the grid view.</p>
+        <button class="btn" onclick="one()">1</button>
+        <button class="btn active" onclick="two()">2</button>
+        <button class="btn" onclick="four()">4</button>
+    </div>
+
+    <!-- Photo Grid -->
+    {% if source %}
+        <div class="row"><h1>No Picture</h1></div>
+        
+    {% endif %}
+    <div class="row">
+            
+            <div class="column" id="pics0">
+            </div>
+            <div class="column" id="pics1">
+            </div>
+            <div class="column" id="pics2">
+            </div>
+            <div class="column" id="pics3">
+            </div>
+
+    </div>
+    <script>
+        var allPic = Array.from('{{allPics}}');
+        // var allPics = JSON.parse('{{allPics}}');
+        window.onload = function () {
+
+            var pics = '{{allPics}}';
+            pics = pics.replaceAll(" ", '');
+            pics = pics.replaceAll("&amp;", '&');
+            pics = pics.replace(/\[|\]/g, '').split(',');
+
+            console.log(pics);
+            var allPics = []
+
+            var content = '';
+
+            for (let step = 0; step < pics.length; step++) {
+                allPics.push(pics[step].slice(5, -5));
+                console.log(pics[step].slice(5, -5));
+            }
+            // for (let step = 0; step < pics.length; step++) {
+
+            //     if (step % 2 === 0){
+            //         // console.log(step % 2 === 0);
+            //         // console.log(pics[step]);
+            //         content = content.concat(pics[step], ",");
+            //         // console.log(content);
+            //     }else{
+            //         content = content.concat(pics[step]);
+            //         // console.log(content);
+            //         // console.log(content);
+            //         content = content.slice(5, -5);
+            //         // console.log(content);
+            //         allPics.push(content);
+            //         content = '';
+            //     }
+            // } 
+
+            var arrayImagesElement0 = document.getElementById("pics0");
+            var arrayImagesElement1 = document.getElementById("pics1");
+            var arrayImagesElement2 = document.getElementById("pics2");
+            var arrayImagesElement3 = document.getElementById("pics3");
+            var ct = 0;
+
+            function logfunc(item) {
+                var images = document.createElement('img');
+                images.src = item;
+                images.style.width = "100%";
+                if (ct % 4 === 0) {
+                    console.log("0");
+                    arrayImagesElement0.appendChild(images);
+                } else if (ct % 4 === 1) {
+                    console.log("1");
+                    arrayImagesElement1.appendChild(images);
+                } else if (ct % 4 === 2) {
+                    arrayImagesElement2.appendChild(images);
+                } else {
+                    arrayImagesElement3.appendChild(images);
+                }
+                ct++;
+            }
+            allPics.forEach(logfunc);
+
+        };
+
+
+    </script>
+    <script>
+        // Get the elements with class="column"
+        var elements = document.getElementsByClassName("column");
+
+        // Declare a loop variable
+        var i;
+
+        // Full-width images
+        function one() {
+            for (i = 0; i < elements.length; i++) {
+                elements[i].style.msFlex = "100%";  // IE10
+                elements[i].style.flex = "100%";
+            }
+        }
+
+        // Two images side by side
+        function two() {
+            for (i = 0; i < elements.length; i++) {
+                elements[i].style.msFlex = "50%";  // IE10
+                elements[i].style.flex = "50%";
+            }
+        }
+
+        // Four images side by side
+        function four() {
+            for (i = 0; i < elements.length; i++) {
+                elements[i].style.msFlex = "25%";  // IE10
+                elements[i].style.flex = "25%";
+            }
+        }
+
+        // Add active class to the current button (highlight it)
+        var header = document.getElementById("myHeader");
+        var btns = header.getElementsByClassName("btn");
+        for (var i = 0; i < btns.length; i++) {
+            btns[i].addEventListener("click", function () {
+                var current = document.getElementsByClassName("active");
+                current[0].className = current[0].className.replace(" active", "");
+                this.className += " active";
+            });
+        }
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>{{title}}</title>
+        <style>
+            table, tr, td, th {
+                border: 1px solid black;
+                border-collapse: collapse;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>{{title}}</h1>
+        <table> 
+        <thead> 
+               <th>name</th><th>path</th>
+        </thead>
+        {% for row in cursor %}
+            <tr>
+                <td>{{ row[0]}}</td><td>{{ row[1]}}</td>
+            </tr>
+        {% endfor %}
+        </table>
+    </body>
+</html>

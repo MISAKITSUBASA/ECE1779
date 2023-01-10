@@ -1,0 +1,10 @@
+{
+  "frontend": {
+    "app_function": "frontend.webapp",
+    "aws_region": "us-east-1",
+    "profile_name": "default",
+    "project_name": "front",
+    "runtime": "python3.7",
+    "s3_bucket": "zappa-kgmjafdf3"
+  }
+}

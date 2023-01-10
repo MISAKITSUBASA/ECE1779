@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>show</title>
+    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+</head>
+
+<body>
+    <div>
+        <form>
+            <div>
+                <label class="form-label">Key to look up:</label>
+                <input class="border rounded form-control form-control-sm" type="text"
+                    placeholder="Please enter the key" name="key">
+                <button class="btn btn-primary" type="submit">Submit</button>
+            </div>
+        </form>
+        {%if key%}
+        <div>
+
+            <img src="{{url_for('show_API', key_value = key)}}">
+
+        </div>
+        {%endif%}
+</body>
+
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <title>show</title>
+</head>
+
+<body>
+    <div>
+        <form action="{{ url_for('show') }}" method="post" enctype='multipart/form-data'>
+            <div>
+                <label class="form-label">Key to look up:</label>
+                <input type="text" placeholder="Please enter the key" name="key_value" id="key_value">
+                <button class="btn btn-primary" type="submit">Submit</button>
+            </div>
+        </form>
+
+        {% if source %}
+        <div>
+        </div>
+        <div>
+            <img src="{{source}}">
+        </div>
+        {% endif %}
+
+</body>
+
+</html>

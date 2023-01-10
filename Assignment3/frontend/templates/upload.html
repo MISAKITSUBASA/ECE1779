@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+     <!-- Required meta tags -->
+     <meta charset="utf-8" />
+     <meta
+         name="viewport"
+         content="width=device-width, initial-scale=1, shrink-to-fit=no"
+     />
+     <!-- Bootstrap CSS -->
+     <link
+         rel="stylesheet"
+         href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
+         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+         crossorigin="anonymous"
+     />
+     <title>Photo APP</title>
+    <!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <head>
+        <link rel="stylesheet" href="styles.css">
+        <title>upload image</title>
+    </head>
+    <body>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <a class="navbar-brand" href="{{url_for('main')}} ">Photo APP</a>
+            <button
+                class="navbar-toggler"
+                type="button"
+                data-toggle="collapse"
+                data-target="#navbarNav"
+                aria-controls="navbarNav"
+                aria-expanded="false"
+                aria-label="Toggle navigation"
+            >
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+
+                    {% if not success %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{url_for('login')}}"
+                            >Log in
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{url_for('signup')}}"
+                            >Sign Up
+                        </a>
+                    </li>
+                    {% endif %} {% if success %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{url_for('gallery')}}"
+                            >Gallery
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{url_for('upload')}}"
+                            >Upload
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{url_for('show')}}"
+                            >Show Image</a
+                        >
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{url_for('getkeys')}}"
+                            >ShowAllKeys
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{url_for('showImageByLabel')}}"
+                            >ShowImageByLabel
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{url_for('config')}}"
+                            >ConfigMem
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{url_for('signout')}}"
+                            >Sign Out
+                        </a>
+                    </li>
+                    {% endif %}
+                    
+                </ul>
+            </div>
+        </nav>
+            <form action="{{ url_for('uploadApi')}}" method="post" enctype='multipart/form-data' >
+                <div class="form-group">
+                    <label>key:</label>
+                    <input type="text" name="key" class="form-control"/>
+                </div>
+
+                <div class="form-group" >
+                    <label>upload file:</label>
+                    <input type=file name = "file"/>
+                </div>
+                <button type="submit" class="btn btn-default">Submit</button>
+            </form>
+            <p> Your available space: {{available_space}} MB</p>
+            {% if success_up %}
+                <div>
+                    successfully upload
+                </div>                
+            {% endif %}  
+            {% if success_up == False %}
+            <div>
+                fail to upload
+            </div>
+            {% endif %} 
+            {%if excced%}
+            <div>Exceed the Driver Limit</div>
+            {% endif %}
+
+            
+            <!-- Optional JavaScript -->
+        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+        <script
+        src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"
+    ></script>
+    <script
+        src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"
+    ></script>
+    <script
+        src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"
+    ></script>
+    <body> 
+
+   
+</html>
